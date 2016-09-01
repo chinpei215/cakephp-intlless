@@ -1,0 +1,21 @@
+{
+    "name": "chinpei215/cakephp-intlless",
+    "description": "Intlless plugin for CakePHP",
+    "type": "cakephp-plugin",
+    "require": {
+        "php": ">=5.4.16"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Intlless\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Intlless\\Test\\": "tests"
+        }
+    }
+}
