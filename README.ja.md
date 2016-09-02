@@ -69,7 +69,7 @@ Type::build('time')
     /*->useLocaleParser()*/;
 ```
 
-次に composer の **vendor/autoload.php** を読み込んでいる場所の**直前**に、 **plugins/Intlless/src/functions.php** を読み込む命令を入れてください。
+次に composer の **vendor/autoload.php** を読み込んでいる場所の*直前*に、 **plugins/Intlless/src/functions.php** を読み込む命令を入れてください。
 `__()` などのメッセージ関数が intl 拡張モジュールに依存しており、これらを上書きしなければならないからです。
 
 **vendor/autoload.php** を読み込んでいる位置は、お使いの CakePHP のバージョンによって異なります。
@@ -104,7 +104,7 @@ require ROOT . DS . 'vendor' . DS . 'autoload.php';
 ```
 ----
 
-これで インストールは完了です。 intl 拡張モジュールなしでもアプリケーションが**それなりに**動作するはずです。
+これで インストールは完了です。 intl 拡張モジュールなしでもアプリケーションが*それなりに*動作するはずです。
 
 ## 制限
 
@@ -142,7 +142,7 @@ echo $time->timeAgoInWords(); // 致命的エラーになります
 ### 数値の制限
 
 `Cake\I18n\Number` は `Intlless\Number` クラスのエイリアスになります。
-`Intlless\Number` クラスは以下のメソッド**のみ**を提供する小さなクラスです。
+`Intlless\Number` クラスは以下のメソッド*のみ*を提供する小さなクラスです。
 
 - `precision()`
 - `toReadableSize()`
