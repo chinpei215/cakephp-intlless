@@ -1,8 +1,8 @@
 # Intlless plugin for CakePHP
 
-Intlless プラグインは intl 拡張モジュールなしでアプリケーションを*それなりに*動作させるためのプラグインです。
+Intlless プラグインは intl 拡張モジュールなしでアプリケーションを*それなりに*動作させるための CakePHP 3.x 用のプラグインです。
 
-他の言語で読む: [English](README.md), **Japanese**
+他の言語で読む: [English](README.md), **日本語**
 
 ## インストール方法
 
@@ -15,10 +15,10 @@ composer を実行する環境に intl 拡張モジュールが読み込まれ�
 
 ----
 ### Zip ファイルでのインストール
-ダウンロードした zip ファイルを解答して、 **Intlless** という名前で plugins ディレクトリに設置してください。
+ダウンロードした zip ファイルを解答して、 **Intlless** という名前で **plugins/** ディレクトリに設置してください。
 
 ### Git でのインストール
-[git](https://git-scm.com/) でインストールを行う場合、 plugins ディレクトリ内で以下のコマンドを実行してください。
+[git](https://git-scm.com/) でインストールを行う場合、 **plugins/** ディレクトリ内で以下のコマンドを実行してください。
 
 ```
 git clone https://github.com/chinpei215/cakephp-intlless.git Intlless
@@ -75,7 +75,7 @@ Type::build('time')
 **vendor/autoload.php** を読み込んでいる位置は、お使いの CakePHP のバージョンによって異なります。
 
 ----
-### CakePHP >= 3.3
+### CakePHP &gt;= 3.3
 
 CakePHP 3.3 以上のバージョンでは、以下の三つのファイルにそれぞれ記述されています。
 
@@ -122,7 +122,7 @@ echo __('{0,number,#,###}', 100); // {0,number,#,###} を表示します
 
 ### 日付時刻の制限
 
-`Cake\I18n\Time` をはじめとする日付／時刻のクラスは、 `Cake\Chronos\Chronos` などのエイリアスになります。
+`Cake\I18n\Time` をはじめとする日付／時刻のクラスは、 [Chronos](http://book.cakephp.org/3.0/ja/chronos.html) などのエイリアスになります。
 `Chronos` では定義されていない `i18nFormat()` 、 `timeAgoInWords()` 、 `nice()` 、およびその他のメソッドは呼び出すことができません。
 
 ```php
@@ -137,7 +137,7 @@ echo $time->timeAgoInWords(); // 致命的エラーになります
 
 これは `Time` ヘルパーからの呼び出しでも同様です。また、日付時刻の書式の地域化には対応していません。
 
-なお、 CakePHP 3.2 未満のバージョンでは `Cake\I18n\Time` は `Carbon\Carbon` のエイリアスになります。
+なお、 CakePHP 3.2 未満のバージョンでは `Cake\I18n\Time` は代わりに [Carbon](http://carbon.nesbot.com/) のエイリアスになります。
 
 ### 数値の制限
 
@@ -163,4 +163,4 @@ echo Number::currency(1000); // 致命的エラーになります
 ### その他の制限
 
 - その他の `Cake\I18n` 名前空間のクラスは使用することができません。
-- `Cake\Utility\Text::transliterate()` など、 intl 拡張モジュールのライブラリを直接使うメソッドは使用することができません。
+- `Cake\Utility\Text::transliterate()` など、 intl 拡張モジュールを直接使うメソッドは使用することができません。
