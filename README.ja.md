@@ -131,7 +131,7 @@ use Cake\I18n\Time;
 
 $time = new Time('-12 hour');
 
-echo $time->isYesterday(2); // 動作します
+echo $time->isYesterday(); // 動作します
 
 echo $time->timeAgoInWords(); // 致命的エラーになります
 ```
