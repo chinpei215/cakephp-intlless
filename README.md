@@ -149,7 +149,7 @@ Note that, CakePHP earlier than version 3.2, `Cake\I18n\Time` will be an alias o
 - `toPercentage()`
 - `format()`
 
-You cannot call any other method not listed in the above.
+You cannot call any other methods not listed in the above.
 ```php
 use Cake\I18n\Number;
 
@@ -162,5 +162,5 @@ The same can be said about `Number` helper. In addition, they don't support any 
 
 ### Other limitations
 
-- You cannot use any other `Cake\I18n`-namespaced claases.
+- You cannot use any other `Cake\I18n`-namespaced classes.
 - You cannot use any functions using intl extension under the hood, such as `Cake\Utility\Text::transliterate()`.
