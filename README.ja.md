@@ -26,7 +26,7 @@ git clone https://github.com/chinpei215/cakephp-intlless.git Intlless
 ----
 
 プラグインの設置が終わったら、 **config/bootstrap.php** で読み込みますが、これも一般的なプラグインとは異なり、ファイルの前の方で読み込むことが望ましいです。
-なぜなら、まだ `Cake\I18n` 名前空間のクラスが最初に呼び出されるよりも前に、これらを上書きしなければならないからです。通常は **config/app.php** の読み込みの直後が最適です。
+なぜなら、まだ `Cake\I18n` 名前空間のクラスが最初に呼び出されるよりも前に、これらを上書きしなければならないからです。通常は **config/app.php** を読み込んだ直後が最適です。
 
 ```php
 try {
@@ -45,7 +45,7 @@ Plugin::load('Intlless', ['bootstrap' => true, 'autoload' => true]);
 Intlless プラグインでは `Cake\I18n` 名前空間のクラスを上書きするための初期処理を実行する必要があり、
 また、 composer からインストールしていないため、 CakePHP のプラグイン自動読込機能に頼る必要があるのです。
 
-さらに、いくつかの個所を手動書き換える必要があります。
+さらに、いくつかの個所を手動で書き換える必要があります。
 まず、 **config/bootstrap.php** の中で intl 拡張モジュールの有無をチェックしてエラーを投げている場所を探してコメントアウトしてください。
 
 ```php
@@ -149,6 +149,7 @@ echo $time->timeAgoInWords(); // 致命的エラーになります
 - `toPercentage()`
 - `format()`
 
+上記以外のメソッドを利用することはできません。
 ```php
 use Cake\I18n\Number;
 
@@ -162,4 +163,5 @@ echo Number::currency(1000); // 致命的エラーになります
 
 ### その他の制限
 
-`Cake\Utility\Text::transliterate()` など、 intl 拡張モジュールのライブラリを直接使うメソッドは使用することができません。
+- その他の `Cake\I18n` 名前空間のクラスは使用することができません。
+- `Cake\Utility\Text::transliterate()` など、 intl 拡張モジュールのライブラリを直接使うメソッドは使用することができません。
