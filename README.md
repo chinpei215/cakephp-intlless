@@ -79,7 +79,7 @@ The file is included in different places depending on the version of CakePHP you
 
 CakePHP greater than or equal version 3.3, the file is included in the following three files.
 
-1. **config/index.php**
+1. **webroot/index.php**
 2. **bin/cake.php**
 3. **tests/bootstrap.php**
 

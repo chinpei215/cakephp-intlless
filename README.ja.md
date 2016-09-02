@@ -79,7 +79,7 @@ Type::build('time')
 
 CakePHP 3.3 以上のバージョンでは、以下の三つのファイルにそれぞれ記述されています。
 
-1. **config/index.php**
+1. **webroot/index.php**
 2. **bin/cake.php**
 3. **tests/bootstrap.php**
 
