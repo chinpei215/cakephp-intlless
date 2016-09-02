@@ -153,7 +153,7 @@ echo $time->timeAgoInWords(); // 致命的エラーになります
 ```php
 use Cake\I18n\Number;
 
-echo Number::format(1.2345, 3); // 1.234 を出力します
+echo Number::precision(1.2345, 3); // 1.234 を出力します
 
 echo Number::currency(1000); // 致命的エラーになります
 ```
