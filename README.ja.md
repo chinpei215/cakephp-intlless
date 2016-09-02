@@ -94,7 +94,7 @@ require dirname(__DIR__) . '/vendor/autoload.php';
 
 ### CakePHP &lt; 3.3
 
-CakePHP 3.3 未満のバージョンでは、 **config/bootstra.php** に記述されています。
+CakePHP 3.3 未満のバージョンでは、 **config/bootstrap.php** に記述されています。
 
 ```php
 // この行を追加してください
@@ -110,7 +110,7 @@ require ROOT . DS . 'vendor' . DS . 'autoload.php';
 
 ### メッセージの制限
 
-`__()` をはじめとするメッセージ関数は、以下のような複雑な書式を解釈することができません。
+`__()` をはじめとするメッセージ関数は、複雑な書式を解釈することができません。
 
 ```php
 echo __('{0}%', 100);  // 100% を表示します
@@ -124,7 +124,6 @@ echo __('{0,number,#,###}', 100); // {0,number,#,###} を表示します
 
 `Cake\I18n\Time` をはじめとする日付／時刻のクラスは、 `Cake\Chronos\Chronos` などのエイリアスになります。
 `Chronos` では定義されていない `i18nFormat()` 、 `timeAgoInWords()` 、 `nice()` 、およびその他のメソッドは呼び出すことができません。
-なお、 CakePHP 3.2 未満のバージョンでは `Cake\I18n\Time` は `Carbon\Carbon` のエイリアスになります。
 
 ```php
 use Cake\I18n\Time;
@@ -136,8 +135,9 @@ echo $time->isYesterday(); // 動作します
 echo $time->timeAgoInWords(); // 致命的エラーになります
 ```
 
-これは `Time` ヘルパーからの呼び出しでも同様です。
-また、日付時刻の書式の地域化には対応していません。
+これは `Time` ヘルパーからの呼び出しでも同様です。また、日付時刻の書式の地域化には対応していません。
+
+なお、 CakePHP 3.2 未満のバージョンでは `Cake\I18n\Time` は `Carbon\Carbon` のエイリアスになります。
 
 ### 数値の制限
 
@@ -158,8 +158,7 @@ echo Number::precision(1.2345, 3); // 1.234 を出力します
 echo Number::currency(1000); // 致命的エラーになります
 ```
 
-これは `Number` ヘルパーからの呼び出しでも同様です。
-また、数値の書式の地域化には対応していません。
+これは `Number` ヘルパーからの呼び出しでも同様です。また、数値の書式の地域化には対応していません。
 
 ### その他の制限
 
