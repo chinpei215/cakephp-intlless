@@ -49,4 +49,14 @@ class Number
 
         return $options['before'] . number_format($value, $p) . $options['after'];
     }
+
+    public static function formatDelta($value, array $options = [])
+    {
+        $options += ['places' => 0];
+        $value = number_format($value, $options['places'], '.', '');
+        $sign = $value > 0 ? '+' : '';
+        $options['before'] = isset($options['before']) ? $options['before'] . $sign : $sign;
+
+        return static::format($value, $options);
+    }
 }

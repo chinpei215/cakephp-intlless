@@ -167,4 +167,39 @@ class NumberTest extends \PHPUnit_Framework_TestCase
         $expected = '45.60%';
         $this->assertEquals($expected, $result);
     }
+
+    public function testFormatDelta()
+    {
+        $value = '100100100';
+
+        $result = Number::formatDelta($value, ['places' => 0]);
+        $expected = '+100,100,100';
+        $this->assertEquals($expected, $result);
+
+        $result = Number::formatDelta($value, ['before' => '', 'after' => '']);
+        $expected = '+100,100,100';
+        $this->assertEquals($expected, $result);
+
+        $result = Number::formatDelta($value, ['before' => '[', 'after' => ']']);
+        $expected = '[+100,100,100]';
+        $this->assertEquals($expected, $result);
+
+        $result = Number::formatDelta(-$value, ['before' => '[', 'after' => ']']);
+        $expected = '[-100,100,100]';
+        $this->assertEquals($expected, $result);
+
+        $result = Number::formatDelta(-$value, ['before' => '[ ', 'after' => ' ]']);
+        $expected = '[ -100,100,100 ]';
+        $this->assertEquals($expected, $result);
+
+        $value = 0;
+        $result = Number::formatDelta($value, ['places' => 1, 'before' => '[', 'after' => ']']);
+        $expected = '[0.0]';
+        $this->assertEquals($expected, $result);
+
+        $value = 0.0001;
+        $result = Number::formatDelta($value, ['places' => 1, 'before' => '[', 'after' => ']']);
+        $expected = '[0.0]';
+        $this->assertEquals($expected, $result);
+    }
 }
