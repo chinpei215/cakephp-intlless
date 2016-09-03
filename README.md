@@ -35,7 +35,8 @@ After installing CakePHP3, let's intall Intlless plugin.
 
 ### Installing with zip file
 
-Extract the zip file you downloaded and put it into your **plugins** directory, as "**Intlless**".
+Download a [release of Intlless plugin](https://github.com/chinpei215/cakephp-intlless/releases) (Source code).
+After extracting it, put it into your **plugins** directory, as "**Intlless**".
 
 ### Installing with git
 

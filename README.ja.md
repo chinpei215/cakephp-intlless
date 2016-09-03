@@ -35,7 +35,8 @@ CakePHP3 をインストールしたら、次に Intlless プラグインをイ�
 
 ### zip ファイルでのインストール
 
-ダウンロードした zip ファイルを解凍して、 **Intlless** という名前での **plugins** ディレクトリに設置してください。
+任意の [Intlless プラグインのリリース](https://github.com/chinpei215/cakephp-intlless/releases) (Source code) をダウンロードしてください。
+解凍後、 **Intlless** という名前での **plugins** ディレクトリに設置してください。
 
 ### git でのインストール
 
