@@ -21,7 +21,7 @@ zip からインストールする方法と、設定を変更して [composer](h
 以下のコマンドを実行して ext-intl が入っていることにしてしまいます。
 
 ```
-composer config --global platform.ext-intl 1.1.0
+composer config --global platform.ext-intl 0.0.0
 ```
 
 このコマンドを実行した後は、 create-project を実行することができるようになります。

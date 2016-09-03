@@ -21,7 +21,7 @@ Set suitable permissions on your **logs** directory, **tmp** directory and its s
 Execute the following command to pretend you have intl extension.
 
 ```
-composer config --global platform.ext-intl 1.1.0
+composer config --global platform.ext-intl 0.0.0
 ```
 
 After that, you can execute `create-project`.
