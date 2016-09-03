@@ -4,26 +4,64 @@ Intlless plugin is a plugin for CakePHP 3.x, which allows your application to wo
 
 Read this in other languages: **English**, [日本語](README.ja.md)
 
-## Installation
+## Installing CakePHP3
 
-You might have to install this plugin in a bit strange way.
+If you don't have intl installed, you might have trouble installing CakePHP3 itself.
+You can install it with zip file, or with [composer](http://getcomposer.org) by changing configuration.
 
-While you can install this plugin into your CakePHP application using [composer](http://getcomposer.org),
-if you don't have intl extension, CakePHP will refuse to be installed using composer.
+### Installing with zip file
 
-So normally, you would need to install it in alternative ways.
+Download a [release of CakePHP](https://github.com/cakephp/cakephp/releases) (cakephp-3-x-y.zip), and extract it.
+Set suitable permissions on your **logs** directory, **tmp** directory and its subdirectories.
 
+### Installing with composer
+
+Execute the following command to pretend you have intl extension.
+
+```
+composer config --global platform.ext-intl 1.1.0
+```
+
+After that, you can execute `create-project`.
+
+```
+composer create-project --prefer-dist cakephp/app my_app_name
+```
 ----
-### Installing with Zip file
-Extract the zip file you downloaded and put it into your **plugins/** directory, as "**Intlless**".
 
-### Installing with Git
-If you want to install with git, execute the following command in your **plugins/** directory.
+## Installing the plugin
+
+After installing CakePHP3, let's intall Intlless plugin.
+
+### Installing with zip file
+
+Extract the zip file you downloaded and put it into your **plugins** directory, as "**Intlless**".
+
+### Installing with git
+
+If you want to install with [git](https://git-scm.com/), execute the following command in your **plugins** directory.
 
 ```
 git clone https://github.com/chinpei215/cakephp-intlless.git Intlless
 ```
+
+### Installing with composer
+
+Execute the following command if you have not done it yet.
+
+```
+composer config --global platform.ext-intl 1.1.0
+```
+
+After that, you can install the plugin by the following command.
+
+```
+composer require --prefer-dist chinpei215/cakephp-intlless
+```
+
 ----
+
+## Setting up the plugin
 
 Once you put this plugin, you need to load it in your **config/bootstrap.php**, but it would be better to do it near the front part of the file as much as possible.
 Because it is necessary to replace `Cake\I18n`-namespaced classes before the original classes loaded. Normally, it is best to do it just after loading **config/app.php**.
@@ -41,9 +79,12 @@ try {
 // Here is the best place to load
 Plugin::load('Intlless', ['bootstrap' => true, 'autoload' => true]);
 ```
+
 Note that the `boostrap` option and the `autoload` option are set to true in the above example.
 Since Intlless plugin needs to execute bootstrapping to replace `Cake\I18n`-namespaced classes,
-and you didn't install it using composer, it is necessary to use the plugin autoloading feature of CakePHP.
+and if you have installed it with zip, it is necessary to use the  autoloading feature of CakePHP.
+
+Even if you have installed it with composer, make sure to set the `bootstrap` option to true.
 
 In addition, you need to modify some code in your application.
 First, find a line where an error is thrown if intl extension is not loaded, and comment it out.
@@ -69,12 +110,14 @@ Type::build('time')
     /*->useLocaleParser()*/;
 ```
 
-Next, *just before* including **vendor/autoload.php**  of composer, you need to include **plugins/Intlless/src/functions.php**.
-Since `__()` or other messaging functions are depending on intl extension, it is also necessary to replace them.
+Next, *just before* including **vendor/autoload.php**  of composer, you need to include **plugins/Intlless/src/functions.php**. Since `__()` or other messaging functions are depending on intl extension, it is also necessary to replace them.
+
+In case you have installed this plugin with composer, include **vendor/chinpei215/cakephp-intlless/src/functions.php** instead, as the plugin is installed at the path.
 
 The file is included in different places depending on the version of CakePHP you are using.
 
 ----
+
 ### CakePHP &gt;= 3.3
 
 CakePHP greater than or equal version 3.3, the file is included in the following three files.
@@ -86,8 +129,7 @@ CakePHP greater than or equal version 3.3, the file is included in the following
 Add the following statement in the each file.
 
 ```php
-// Add this statement
-require dirname(__DIR__) . '/plugins/Intlless/src/functions.php';
+require dirname(__DIR__) . '/plugins/Intlless/src/functions.php'; // Add this statement
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 ```
@@ -97,11 +139,11 @@ require dirname(__DIR__) . '/vendor/autoload.php';
 CakePHP earlier than version 3.3, the file is included in your **config/bootstrap.php**.
 
 ```php
-// Add this statement
-require ROOT . '/plugins/Intlless/src/functions.php';
+require ROOT . '/plugins/Intlless/src/functions.php'; // Add this statement
 
 require ROOT . DS . 'vendor' . DS . 'autoload.php';
 ```
+
 ----
 
 Installation is end with this. You will see your application works *relatively* well without intl extension.
@@ -151,6 +193,7 @@ Note that, CakePHP earlier than version 3.2, `Cake\I18n\Time` will be an alias o
 - `formatDelta()` (added in 0.2.0)
 
 You cannot call any other methods not listed in the above.
+
 ```php
 use Cake\I18n\Number;
 

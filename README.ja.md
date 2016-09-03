@@ -4,29 +4,67 @@ Intlless プラグインは intl 拡張モジュールなしでアプリケー�
 
 他の言語で読む: [English](README.md), **日本語**
 
-## インストール方法
+## CakePHP3 のインストール
 
-このプラグインをインストールする方法は少し変わっています。
+もしも intl 拡張モジュールをインストールできていない場合、 CakePHP3 自体のインストールができなくて困っているかもしれません。
+zip からインストールする方法と、設定を変更して [composer](http://getcomposer.org) からインストールする方法があります。
 
-他の CakePHP プラグインと同様に [composer](http://getcomposer.org) を使って、お使いの CakePHP アプリケーションにインストールすることもできますが、
-composer を実行する環境に intl 拡張モジュールが読み込まれていない場合、 CakePHP 自体に composer でのインストールを拒絶されてしまいます。
+### zip ファイルでのインストール
 
-このため、通常は別の方法でインストールすることになります。
+任意の [CakePHP のリリース](https://github.com/cakephp/cakephp/releases) (cakephp-3-x-y.zip) をダウンロードして解凍してください。
+設置後は、tmp とそのサブディレクトリ、および logs ディレクトリの [パーミションを適切な値に設定](http://book.cakephp.org/3.0/ja/installation.html#id7) してください。
 
+### composer でのインストール
+
+以下のコマンドを実行して ext-intl が入っていることにしてしまいます。
+
+```
+composer config --global platform.ext-intl 1.1.0
+```
+
+このコマンドを実行した後は、 create-project を実行することができるようになります。
+
+```
+composer create-project --prefer-dist cakephp/app my_app_name
+```
 ----
-### Zip ファイルでのインストール
-ダウンロードした zip ファイルを解答して、 **Intlless** という名前で **plugins/** ディレクトリに設置してください。
 
-### Git でのインストール
-[git](https://git-scm.com/) でインストールを行う場合、 **plugins/** ディレクトリ内で以下のコマンドを実行してください。
+## プラグインのインストール
+
+CakePHP3 をインストールしたら、次に Intlless プラグインをインストールします。
+
+### zip ファイルでのインストール
+
+ダウンロードした zip ファイルを解凍して、 **Intlless** という名前での **plugins** ディレクトリに設置してください。
+
+### git でのインストール
+
+[git](https://git-scm.com/) でインストールを行う場合、 **plugins** ディレクトリ内で以下のコマンドを実行してください。
 
 ```
 git clone https://github.com/chinpei215/cakephp-intlless.git Intlless
 ```
+
+### composer でのインストール
+
+まだ実行していなければ、以下のコマンドを実行してください。
+
+```
+composer config --global platform.ext-intl 1.1.0
+```
+
+実行後、以下のコマンドでインストールを行ってください。
+
+```
+composer require --prefer-dist chinpei215/cakephp-intlless
+```
+
 ----
 
-プラグインの設置が終わったら、 **config/bootstrap.php** で読み込みますが、これも一般的なプラグインとは異なり、ファイルの前の方で読み込むことが望ましいです。
-なぜなら、まだ `Cake\I18n` 名前空間のクラスが最初に呼び出されるよりも前に、これらを上書きしなければならないからです。通常は **config/app.php** を読み込んだ直後が最適です。
+## プラグインのセットアップ
+
+プラグインの設置が終わったら、 **config/bootstrap.php** で読み込みますが、なるべくファイルの前の方で読み込むことが望ましいです。
+なぜなら、まだ `Cake\I18n` 名前空間のクラスが最初に呼び出されるよりも前に、これらを置き換えなければならないからです。通常は **config/app.php** を読み込んだ直後が最適です。
 
 ```php
 try {
@@ -41,9 +79,12 @@ try {
 // この辺りで呼び出すのが最適です
 Plugin::load('Intlless', ['bootstrap' => true, 'autoload' => true]);
 ```
+
 上記の例で `bootstrap` オプションと `autoload` オプションにそれぞれ真を渡していることに注意してください。
-Intlless プラグインでは `Cake\I18n` 名前空間のクラスを上書きするための初期処理を実行する必要があり、
-また、 composer からインストールしていないため、 CakePHP のプラグイン自動読込機能に頼る必要があるのです。
+Intlless プラグインでは `Cake\I18n` 名前空間のクラスを置き換えるための初期処理を実行する必要があり、
+また、プラグインを zip からインストールした場合、CakePHP 自体のプラグイン自動読込機能に頼る必要があります。
+
+もしも、プラグインを composer からインストールした場合であっても `bootstrap` オプションには必ず真を渡してください。
 
 さらに、いくつかの個所を手動で書き換える必要があります。
 まず、 **config/bootstrap.php** の中で intl 拡張モジュールの有無をチェックしてエラーを投げている場所を探してコメントアウトしてください。
@@ -69,12 +110,14 @@ Type::build('time')
     /*->useLocaleParser()*/;
 ```
 
-次に composer の **vendor/autoload.php** を読み込んでいる場所の*直前*に、 **plugins/Intlless/src/functions.php** を読み込む命令を入れてください。
-`__()` などのメッセージ関数が intl 拡張モジュールに依存しており、これらを上書きしなければならないからです。
+次に composer の **vendor/autoload.php** を読み込んでいる場所の*直前*に、**plugins/Intlless/src/functions.php** を読み込む命令を入れてください。 `__()` などのメッセージ関数が intl 拡張モジュールに依存しており、これらも置き換えなければならないからです。
+
+プラグインを composer でインストールした場合は、設置場所が変わりますので、代わりに **vendor/chinpei215/cakephp-intlless/src/functions.php** を読み込んでください。
 
 **vendor/autoload.php** を読み込んでいる位置は、お使いの CakePHP のバージョンによって異なります。
 
 ----
+
 ### CakePHP &gt;= 3.3
 
 CakePHP 3.3 以上のバージョンでは、以下の三つのファイルにそれぞれ記述されています。
@@ -86,7 +129,6 @@ CakePHP 3.3 以上のバージョンでは、以下の三つのファイルに�
 それぞれのファイルに以下の命令を追加してください。
 
 ```php
-// この行を追加してください
 require dirname(__DIR__) . '/plugins/Intlless/src/functions.php';
 
 require dirname(__DIR__) . '/vendor/autoload.php';
@@ -97,11 +139,11 @@ require dirname(__DIR__) . '/vendor/autoload.php';
 CakePHP 3.3 未満のバージョンでは、 **config/bootstrap.php** に記述されています。
 
 ```php
-// この行を追加してください
-require ROOT . '/plugins/Intlless/src/functions.php';
+require ROOT . '/plugins/Intlless/src/functions.php'; // この行を追加してください
 
 require ROOT . DS . 'vendor' . DS . 'autoload.php';
 ```
+
 ----
 
 これで インストールは完了です。 intl 拡張モジュールなしでもアプリケーションが*それなりに*動作するはずです。
@@ -151,6 +193,7 @@ echo $time->timeAgoInWords(); // 致命的エラーになります
 - `formatDelta()` (0.2.0 で追加)
 
 上記以外のメソッドを利用することはできません。
+
 ```php
 use Cake\I18n\Number;
 
