@@ -1,3 +1,5 @@
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.txt)
+
 # Intlless plugin for CakePHP
 
 Intlless plugin is a plugin for CakePHP 3.x, which allows your application to work *relatively* well without intl extension.
@@ -29,7 +31,7 @@ composer create-project --prefer-dist cakephp/app my_app_name
 ```
 ----
 
-## Installing the plugin
+## Installing Intlless plugin
 
 After installing CakePHP3, let's intall Intlless plugin.
 
@@ -62,7 +64,7 @@ composer require --prefer-dist chinpei215/cakephp-intlless
 
 ----
 
-## Setting up the plugin
+## Setting up Intlless plugin
 
 Once you put this plugin, you need to load it in your **config/bootstrap.php**, but it would be better to do it near the front part of the file as much as possible.
 Because it is necessary to replace `Cake\I18n`-namespaced classes before the original classes loaded. Normally, it is best to do it just after loading **config/app.php**.

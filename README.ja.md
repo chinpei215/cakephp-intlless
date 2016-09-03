@@ -1,3 +1,5 @@
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.txt)
+
 # Intlless plugin for CakePHP
 
 Intlless プラグインは intl 拡張モジュールなしでアプリケーションを*それなりに*動作させるための CakePHP 3.x 用のプラグインです。
@@ -29,7 +31,7 @@ composer create-project --prefer-dist cakephp/app my_app_name
 ```
 ----
 
-## プラグインのインストール
+## Intlless プラグインのインストール
 
 CakePHP3 をインストールしたら、次に Intlless プラグインをインストールします。
 
@@ -62,7 +64,7 @@ composer require --prefer-dist chinpei215/cakephp-intlless
 
 ----
 
-## プラグインのセットアップ
+## Intlless プラグインのセットアップ
 
 プラグインの設置が終わったら、 **config/bootstrap.php** で読み込みますが、なるべくファイルの前の方で読み込むことが望ましいです。
 なぜなら、まだ `Cake\I18n` 名前空間のクラスが最初に呼び出されるよりも前に、これらを置き換えなければならないからです。通常は **config/app.php** を読み込んだ直後が最適です。
