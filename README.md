@@ -148,6 +148,7 @@ Note that, CakePHP earlier than version 3.2, `Cake\I18n\Time` will be an alias o
 - `toReadableSize()`
 - `toPercentage()`
 - `format()`
+- `formatDelta()` (added in 0.2.0)
 
 You cannot call any other methods not listed in the above.
 ```php

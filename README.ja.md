@@ -148,6 +148,7 @@ echo $time->timeAgoInWords(); // 致命的エラーになります
 - `toReadableSize()`
 - `toPercentage()`
 - `format()`
+- `formatDelta()` (0.2.0 で追加)
 
 上記以外のメソッドを利用することはできません。
 ```php
