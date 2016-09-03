@@ -167,7 +167,7 @@ In addition, they don't support any localization features.
 
 ### Limitation of date and time functions
 
-`Cake\I18n\Time` or other date and time classes will be a alias of [Chronos](http://book.cakephp.org/3.0/en/chronos.html) or its siblings.
+`Cake\I18n\Time` or other date and time classes will be an alias of [Chronos](http://book.cakephp.org/3.0/en/chronos.html) or its siblings.
 You cannot call any methods not defined in `Chronos`, such as `i18nFormat()`, `timeAgoInWords()`, `nice()` and so on.
 
 ```php
