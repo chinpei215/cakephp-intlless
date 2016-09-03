@@ -53,7 +53,7 @@ git clone https://github.com/chinpei215/cakephp-intlless.git Intlless
 まだ実行していなければ、以下のコマンドを実行してください。
 
 ```
-composer config --global platform.ext-intl 1.1.0
+composer config --global platform.ext-intl 0.0.0
 ```
 
 実行後、以下のコマンドでインストールを行ってください。

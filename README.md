@@ -33,7 +33,7 @@ composer create-project --prefer-dist cakephp/app my_app_name
 
 ## Installing Intlless plugin
 
-After installing CakePHP3, let's intall Intlless plugin.
+After installing CakePHP3, let's install Intlless plugin.
 
 ### Installing with zip file
 
@@ -53,7 +53,7 @@ git clone https://github.com/chinpei215/cakephp-intlless.git Intlless
 Execute the following command if you have not done it yet.
 
 ```
-composer config --global platform.ext-intl 1.1.0
+composer config --global platform.ext-intl 0.0.0
 ```
 
 After that, you can install the plugin by the following command.
