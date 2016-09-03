@@ -3,7 +3,8 @@
     "description": "Intlless plugin for CakePHP",
     "type": "cakephp-plugin",
     "require": {
-        "php": ">=5.4.16"
+        "php": ">=5.4.16",
+        "cakephp/cakephp": "~3.0"
     },
     "require-dev": {
         "phpunit/phpunit": "*"
@@ -15,7 +16,13 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Intlless\\Test\\": "tests"
+            "Intlless\\Test\\": "tests",
+            "Cake\\Test\\": "./vendor/cakephp/cakephp/tests"
+        }
+    },
+    "config": {
+        "platform": {
+            "ext-intl": "0.0.0"
         }
     }
 }
