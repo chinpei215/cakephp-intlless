@@ -18,6 +18,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
     public function testClassAlias() {
         $this->assertInstanceOf('Intlless\I18n', new I18n);
         $this->assertInstanceOf('Intlless\Number', new Number);
+        $this->assertInstanceOf('Intlless\Time', new Time);
 
         if (version_compare(Configure::version(), '3.2.0', '>=')) {
             $this->assertInstanceOf('Cake\Chronos\Chronos', new FrozenTime);
