@@ -1,6 +1,7 @@
 <?php
 use Cake\Core\Configure;
 
+class_alias('Intlless\I18n', 'Cake\I18n\I18n');
 class_alias('Intlless\Number', 'Cake\I18n\Number');
 
 if (class_exists('Cake\Chronos\Chronos')) {
