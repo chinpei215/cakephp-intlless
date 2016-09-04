@@ -1,17 +1,21 @@
 <?php
 namespace Intlless\Test\TestCase;
 
+use Cake\Controller\ComponentRegistry;
+use Cake\Controller\Component\CsrfComponent;
 use Cake\Core\Configure;
-use Cake\View\View;
-use Cake\View\Helper\TimeHelper;
-use Cake\View\Helper\NumberHelper;
-
+use Cake\Event\Event;
+use Cake\I18n\Date;
+use Cake\I18n\FrozenDate;
+use Cake\I18n\FrozenTime;
 use Cake\I18n\I18n;
 use Cake\I18n\Number;
 use Cake\I18n\Time;
-use Cake\I18n\Date;
-use Cake\I18n\FrozenTime;
-use Cake\I18n\FrozenDate;
+use Cake\Network\Request;
+use Cake\Network\Response;
+use Cake\View\Helper\NumberHelper;
+use Cake\View\Helper\TimeHelper;
+use Cake\View\View;
 
 class IntegrationTest extends \PHPUnit_Framework_TestCase
 {
@@ -30,14 +34,31 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testTimeHelper() {
-        $Time = new TimeHelper(new View());
-        $this->assertTrue( $Time->wasYesterday('yesterday') );
+    public function testCsrfComponent() {
+        $controller = $this->createMock('Cake\Controller\Controller');
+        $controller->request = new Request([
+            'environment' => ['REQUEST_METHOD' => 'GET'],
+        ]);
+        $controller->response = new Response();
+
+        $event = new Event('Controller.startup', $controller);
+
+        $component = new CsrfComponent(new ComponentRegistry($controller), ['expiry' => 1234567890]);
+        $component->startup($event);
+
+        $token = $controller->response->cookie('csrfToken');
+        $this->assertEquals(1234567890, $token['expire']);
+    }
+
+
+    public function test() {
+        $helper = new TimeHelper(new View());
+        $this->assertTrue( $helper->wasYesterday('yesterday') );
     }
 
     public function testNumberHelper() {
-        $Number = new NumberHelper(new View());
-        $this->assertEquals('1.23', $Number->precision('1.234', 2));
+        $helper = new NumberHelper(new View());
+        $this->assertEquals('1.23', $helper->precision('1.234', 2));
     }
 
     public function test__() {
