@@ -8,7 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Added `Intlless\I18n` class. `Cake\I18n\I18n` is now an alias for it.
 - Added `Intlless\Translator` class.
 - Added `Intlless\Time` class.  `Cake\I18n\Time` is now an alias for it.
-- Added `Intlless\FrozeonTime` class. `Cake\I18n\Time` is now an alias for it.
+- Added `Intlless\FrozenTime` class. `Cake\I18n\FrozenTime` is now an alias for it.
 - Removed all functions from functions.php. It is no longer required.
 
 ## [Version 0.2.0](https://github.com/chinpei215/cakephp-intlless/releases/tag/0.2.0)
