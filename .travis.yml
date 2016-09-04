@@ -1,0 +1,12 @@
+language: php
+
+sudo: false
+
+php:
+  - 5.6
+
+before_script:
+  - composer install --prefer-dist --dev
+
+notifications:
+  email: false
