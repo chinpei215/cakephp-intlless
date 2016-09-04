@@ -113,42 +113,6 @@ Type::build('time')
     /*->useLocaleParser()*/;
 ```
 
-次に composer の **vendor/autoload.php** を読み込んでいる場所の*直前*に、**plugins/Intlless/src/functions.php** を読み込む命令を入れてください。 `__()` などのメッセージ関数が intl 拡張モジュールに依存しており、これらも置き換えなければならないからです。
-
-プラグインを composer でインストールした場合は、設置場所が変わりますので、代わりに **vendor/chinpei215/cakephp-intlless/src/functions.php** を読み込んでください。
-
-**vendor/autoload.php** を読み込んでいる位置は、お使いの CakePHP のバージョンによって異なります。
-
-----
-
-### CakePHP &gt;= 3.3
-
-CakePHP 3.3 以上のバージョンでは、以下の三つのファイルにそれぞれ記述されています。
-
-1. **webroot/index.php**
-2. **bin/cake.php**
-3. **tests/bootstrap.php**
-
-それぞれのファイルに以下の命令を追加してください。
-
-```php
-require dirname(__DIR__) . '/plugins/Intlless/src/functions.php';
-
-require dirname(__DIR__) . '/vendor/autoload.php';
-```
-
-### CakePHP &lt; 3.3
-
-CakePHP 3.3 未満のバージョンでは、 **config/bootstrap.php** に記述されています。
-
-```php
-require ROOT . '/plugins/Intlless/src/functions.php'; // この行を追加してください
-
-require ROOT . DS . 'vendor' . DS . 'autoload.php';
-```
-
-----
-
 これで インストールは完了です。 intl 拡張モジュールなしでもアプリケーションが*それなりに*動作するはずです。
 
 ## 制限
@@ -167,8 +131,9 @@ echo __('{0,number,#,###}', 100); // {0,number,#,###} を表示します
 
 ### 日付時刻の制限
 
-`Cake\I18n\Time` をはじめとする日付／時刻のクラスは、 [Chronos](http://book.cakephp.org/3.0/ja/chronos.html) などのエイリアスになります。
-`Chronos` では定義されていない `i18nFormat()` 、 `timeAgoInWords()` 、 `nice()` 、およびその他のメソッドは呼び出すことができません。
+`Cake\I18n\Time` は `Intlless\Time` クラスのエイリアスになります。
+`Intlless\Time` は [Chronos](http://book.cakephp.org/3.0/ja/chronos.html) の `Cake\Chronos\MutableDateTime` サブクラスで、コンストラクタの定義のみが異なります。
+したがって、親クラスでは定義されていない `i18nFormat()` 、 `timeAgoInWords()` 、 `nice()` 、およびその他のメソッドは呼び出すことができません。
 
 ```php
 use Cake\I18n\Time;
@@ -182,12 +147,19 @@ echo $time->timeAgoInWords(); // 致命的エラーになります
 
 これは `Time` ヘルパーからの呼び出しでも同様です。また、日付時刻の書式の地域化には対応していません。
 
-なお、 CakePHP 3.2 未満のバージョンでは `Cake\I18n\Time` は代わりに [Carbon](http://carbon.nesbot.com/) のエイリアスになります。
+`Cake\I18n\FrozenTime` は `Intlless\FrozenTime` クラスのエイリアスになります。
+`Intlless\Time` は `Cake\Chronos\Chronos` のサブクラスで、コンストラクタの定義のみが異なります。
+同様に、親クラスでは定義されていないメソッドは呼び出すことができません。
+
+`Cake\I18n\Date` と `Cake\I18n\FrozenDate` はそれぞれ `Cake\Chronos\MutableDate` と `Cake\Chronos\Date` のエイリアスになります。
+
+CakePHP 3.2 未満のバージョンでは `Cake\Chronos\MutableTime` は [Carbon](http://carbon.nesbot.com/) のエイリアスになります。
+`Cake\I18n\FrozenTime` などのクラスは定義されません。
 
 ### 数値の制限
 
 `Cake\I18n\Number` は `Intlless\Number` クラスのエイリアスになります。
-`Intlless\Number` クラスは以下のメソッド*のみ*を提供する小さなクラスです。
+`Intlless\Number` は以下のメソッド*のみ*を提供する小さなクラスです。
 
 - `precision()`
 - `toReadableSize()`
@@ -210,4 +182,5 @@ echo Number::currency(1000); // 致命的エラーになります
 ### その他の制限
 
 - その他の `Cake\I18n` 名前空間のクラスは使用することができません。
+- `Cake\ORM\Behavior\TranslateBehavior` クラスは使用することができません。
 - `Cake\Utility\Text::transliterate()` など、 intl 拡張モジュールを直接使うメソッドは使用することができません。

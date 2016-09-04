@@ -113,42 +113,6 @@ Type::build('time')
     /*->useLocaleParser()*/;
 ```
 
-Next, *just before* including **vendor/autoload.php**  of composer, you need to include **plugins/Intlless/src/functions.php**. Since `__()` or other messaging functions are depending on intl extension, it is also necessary to replace them.
-
-In case you have installed this plugin with composer, include **vendor/chinpei215/cakephp-intlless/src/functions.php** instead, as the plugin is installed at the path.
-
-The file is included in different places depending on the version of CakePHP you are using.
-
-----
-
-### CakePHP &gt;= 3.3
-
-CakePHP greater than or equal version 3.3, the file is included in the following three files.
-
-1. **webroot/index.php**
-2. **bin/cake.php**
-3. **tests/bootstrap.php**
-
-Add the following statement in the each file.
-
-```php
-require dirname(__DIR__) . '/plugins/Intlless/src/functions.php'; // Add this statement
-
-require dirname(__DIR__) . '/vendor/autoload.php';
-```
-
-### CakePHP &lt; 3.3
-
-CakePHP earlier than version 3.3, the file is included in your **config/bootstrap.php**.
-
-```php
-require ROOT . '/plugins/Intlless/src/functions.php'; // Add this statement
-
-require ROOT . DS . 'vendor' . DS . 'autoload.php';
-```
-
-----
-
 Installation is end with this. You will see your application works *relatively* well without intl extension.
 
 ## Limitations
@@ -167,8 +131,9 @@ In addition, they don't support any localization features.
 
 ### Limitation of date and time functions
 
-`Cake\I18n\Time` or other date and time classes will be an alias of [Chronos](http://book.cakephp.org/3.0/en/chronos.html) or its siblings.
-You cannot call any methods not defined in `Chronos`, such as `i18nFormat()`, `timeAgoInWords()`, `nice()` and so on.
+`Cake\I18n\Time` will be an alias of `Intlless\Time`.
+`Intlless\Time` is a sub-class of `Cake\Chronos\MutableDateTime` contained in [Chronos](http://book.cakephp.org/3.0/ja/chronos.html), with different constructor.
+So you cannot call any methods not defined in the parent class, such as `i18nFormat()`, `timeAgoInWords()`, `nice()` and so on.
 
 ```php
 use Cake\I18n\Time;
@@ -182,7 +147,13 @@ echo $time->timeAgoInWords(); // Throws a fatal error
 
 The same can be said about `Time` helper. In addition, they don't support any localization features.
 
-Note that, CakePHP earlier than version 3.2, `Cake\I18n\Time` will be an alias of [Carbon](http://carbon.nesbot.com/) instead.
+`Intlless\FrozenTime` is a sub-class of `Cake\Chronos\Chronos` with different constructor.
+So you cannot call any methods not defined in the parent class as well.
+
+`Cake\I18n\Date` and `Cake\I18n\FrozenDate` will be an alias of `Cake\Chronos\MutableDate` and `Cake\Chronos\Date`, respectively.
+
+Note that, CakePHP earlier than version 3.2, `Cake\Chronos\MutableTime` will be an alias of [Carbon](http://carbon.nesbot.com/) instead.
+`Cake\I18n\FrozenTime` will be undeclared.
 
 ### Limitation of number functions
 
@@ -210,4 +181,5 @@ The same can be said about `Number` helper. In addition, they don't support any 
 ### Other limitations
 
 - You cannot use any other `Cake\I18n`-namespaced classes.
+- You cannot use `Cake\ORM\Behavior\TranslateBehavior` class.
 - You cannot use any functions using intl extension under the hood, such as `Cake\Utility\Text::transliterate()`.
