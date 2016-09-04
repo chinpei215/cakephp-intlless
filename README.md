@@ -147,6 +147,7 @@ echo $time->timeAgoInWords(); // Throws a fatal error
 
 The same can be said about `Time` helper. In addition, they don't support any localization features.
 
+`Cake\I18n\FrozenTime` will be an alias of `Intlless\FrozenTime`.
 `Intlless\FrozenTime` is a sub-class of `Cake\Chronos\Chronos` with different constructor.
 So you cannot call any methods not defined in the parent class as well.
 
