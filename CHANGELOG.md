@@ -2,6 +2,11 @@
 All notable changes to this project are documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Version 1.0.1](https://github.com/chinpei215/cakephp-intlless/releases/tag/1.0.1)
+**2017-03-25**
+- Added stub of `transliterator\_transliterate()`.
+- Added `.editorconfig`.
+
 ## [Version 1.0.0](https://github.com/chinpei215/cakephp-intlless/releases/tag/1.0.0)
 **2016-09-04**
 - Fixed `CsrfComponent` throws a fatal error.
