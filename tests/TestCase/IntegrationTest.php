@@ -16,6 +16,7 @@ use Cake\Network\Response;
 use Cake\View\Helper\NumberHelper;
 use Cake\View\Helper\TimeHelper;
 use Cake\View\View;
+use Cake\Utility\Text;
 
 class IntegrationTest extends \PHPUnit_Framework_TestCase
 {
@@ -50,8 +51,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1234567890, $token['expire']);
     }
 
-
-    public function test() {
+    public function testTimeHelper() {
         $helper = new TimeHelper(new View());
         $this->assertTrue( $helper->wasYesterday('yesterday') );
     }
@@ -59,6 +59,10 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
     public function testNumberHelper() {
         $helper = new NumberHelper(new View());
         $this->assertEquals('1.23', $helper->precision('1.234', 2));
+    }
+
+    public function testText() {
+        $this->assertEquals('foo-bar', Text::slug('foo bar'));
     }
 
     public function test__() {

@@ -1,6 +1,12 @@
 <?php
 use Cake\Core\Configure;
 
+if (!function_exists('transliterator_transliterate')) {
+    function transliterator_transliterate($transliterator, $subject) {
+        return $subject;
+    }
+}
+
 if (class_exists('Cake\Chronos\Chronos')) {
     class_alias('Cake\Chronos\Date', 'Cake\I18n\FrozenDate');
     class_alias('Cake\Chronos\MutableDate', 'Cake\I18n\Date');
