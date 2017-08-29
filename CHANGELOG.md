@@ -2,6 +2,11 @@
 All notable changes to this project are documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Version 1.0.2](https://github.com/chinpei215/cakephp-intlless/releases/tag/1.0.2)
+**2017-08-30**
+- Made compatible with 3.5.
+- Removed `composer.lock`.
+
 ## [Version 1.0.1](https://github.com/chinpei215/cakephp-intlless/releases/tag/1.0.1)
 **2017-03-25**
 - Added stub of `transliterator\_transliterate()`.
