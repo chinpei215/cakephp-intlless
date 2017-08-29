@@ -1,6 +1,7 @@
 <?php
 namespace Intlless\Test\TestCase;
 
+use Cake\Controller\Controller;
 use Cake\Controller\ComponentRegistry;
 use Cake\Controller\Component\CsrfComponent;
 use Cake\Core\Configure;
@@ -36,11 +37,10 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testCsrfComponent() {
-        $controller = $this->createMock('Cake\Controller\Controller');
+        $controller = new Controller;
         $controller->request = new Request([
             'environment' => ['REQUEST_METHOD' => 'GET'],
         ]);
-        $controller->response = new Response();
 
         $event = new Event('Controller.startup', $controller);
 
